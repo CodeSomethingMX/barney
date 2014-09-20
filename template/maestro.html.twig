@@ -1,0 +1,29 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+	
+	{% for link in links %}
+		<a href="{{link.href}}">{{link.label}}</a>
+	{% endfor %}
+
+	
+	{% if user == null %}	
+		<h3>El usuario no existe</h3>
+	{% else %}
+		<h1>{{user.perfil.username}}</h1>
+		{% if user.cursos | length == 0 %}
+			<h3>No das clases aun XD</h3>
+		{% else %}
+			<h2>Cursos activos</h2>
+			{% for curso in user.cursos %}
+				{% if curso.status == 1 %}
+					<article>
+						Curso: {{curso.nombre}}
+						<a href="{{curso.action}}">Ver mas...</a>
+					</article>	
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	{% endif %}
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+	
+	<article>
+		<ul>
+			<li>{{curso.nombre}}</li>
+			<li>{{curso.fechaInicio}}</li>
+			<li>{{curso.fechaTermino}}</li>
+		</ul>
+	</article>
+	<article>
+		Estos seran los terminos y condiciones
+	</article>
+
+	<form action = "{{action}}" method = "POST">
+
+		<label for = "usr_input_data">Username: </label>
+		<input disabled = "disabled" type = "text" name = "usr_input_data" value = "{{perfil.username}}" />
+
+		<label for = "usr_input_data">Username: </label>
+		<input disabled = "disabled" type = "email" name = "email_input_data" value = "{{perfil.email}}" />
+
+		<input type = "checkbox" name = "condiciones_input_data" value = "1" />Aceptar Terminos y Condiciones
+
+		<input type = "submit" name = "btn_sbt" value = "Suscribirme" />
+
+		<input type = "hidden" name = "token" value = "{{token}}" />
+	</form>
+{% endblock %}

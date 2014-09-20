@@ -1,0 +1,96 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+	
+	{% for link in links %}
+		<ul>
+			<li><a href="{{link.href}}">{{link.label}}</a></li>
+		</ul>
+	{% endfor %}
+
+	{% if notFound %}
+		<h3>Lo sentimos el curso no existe :s</h3>
+	{% else %}
+		{% if curso.status == 0 %}
+			<h3>El curso ya termino</h3>
+		{% else %}
+			<h2>{{curso.nombre}}</h2>
+			<h3>Unidades:</h3>
+
+			{% if user_id == null %}
+			{% else %}
+				<div>
+					<label for="asunto">Asunto: </label>
+					<input type = "text" id = "asunto" />
+					<label for="pregunta">Pregunta?</label>
+					<textarea name = "pregunta" id = "pregunta"></textarea>
+					<button class = "addPregunta" id = "/curso/{{curso.curso_id}}/prefil/{{user_id}}/pregunta">Preguntar</button>
+				</div>
+			{% endif %}
+
+			<div id = "preguntas">
+			{% if curso.preguntas | length == 0 %}
+				<h2 id = "title_pregunta">No hay preguntas en este curso</h2>
+			{% else %}
+				{% for pregunta in curso.preguntas %}
+					<article class = "pregunta">
+						<h4>{{pregunta.asunto}}</h4>
+						<p>{{pregunta.descripcion}}</p>
+						<strong>{{pregunta.fechaEntrada}}</strong>
+						<textarea id = "descripcion{{pregunta.pregunta_id}}"></textarea>
+						<button class = "reply" id = "/pregunta/{{pregunta.pregunta_id}}/respuesta" data-reply="{{pregunta.pregunta_id}}">Agregar respuesta</button>
+						<div id = "r{{pregunta.pregunta_id}}">
+						{% if pregunta.respuestas | length > 0 %}
+							{% for respuesta in pregunta.respuestas %}
+								<div class = "respuesta">
+									<h5>{{respuesta.descripcion}}</h5>
+									<strong>{{respuesta.fechaRespuesta}}</strong>
+								</div>
+							{% endfor %}
+						{% endif %}
+						</div>
+					</article>
+				{% endfor %}
+			{% endif %}
+			</div>
+				
+			{% for unidad in curso.unidades %}
+				<article>
+					<h4>{{unidad.nombre}}</h4>
+					<p>{{unidad.descripcion}}</p>
+					<h4>Lecciones: </h4>
+					{% for leccion in unidad.lecciones %}
+						<article>
+							<h4>{{leccion.nombre}}</h4>
+							<p>{{leccion.descripcion}}</p>
+							{% if leccion.archivos | length == 0 %}
+								<h3>No hay archivos para esta leccion..</h3>
+							{% else %}
+								{% for archivo in leccion.archivos %}
+									<ul>
+										<li>Archivo: {{archivo.nombre}}
+											<ul>
+												<li><a href="{{archivo.view}}" target="_blank">Ver</a></li>
+												<li><a href="{{archivo.download}}" target="_blank">Descargar</a></li>
+											</ul>
+										</li>
+									</ul>
+								{% endfor %}
+							{% endif %}
+							{% if isLogged.logged and isLogged.nivel >= 100 %}
+								<a href="{{leccion.addFile}}">Agregar archivos a esta leccion</a>
+							{% endif %}
+						</article>	
+					{% endfor %}
+				</article>
+			{% endfor %}
+
+		{% endif %}
+	{% endif %}
+
+{% endblock %}
+
+{% block javascript %}
+	<script src = "/js/jquery-2.1.1.min.js"></script>
+	<script src = "/js/pregunta.js"></script>
+{% endblock %}

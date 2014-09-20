@@ -1,0 +1,21 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+	<a href = "{{login}}">Crear una cuenta nueva</a>
+
+	{% for link in links %}
+		<a href="{{link.href}}">{{link.label}}</a>
+	{% endfor %}
+
+	{% for curso in lista_cursos %}
+		<article>
+			<h3>{{curso.nombre}}</h3>
+			<ul>
+				<li>{{curso.fechaInicio}}</li>
+				<li>{{curso.fechaTermino}}</li>
+			</ul>
+			<a href="{{curso.action}}">Suscribirme :)</a>
+		</article>
+	{% endfor %}
+
+{% endblock %}

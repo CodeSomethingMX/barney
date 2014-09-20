@@ -1,0 +1,36 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+	
+	{% if error == 1 %}
+		<h3>El email que acaba de proporcionar no es valido</h3>
+	{% elseif error == 2%}
+		<h3>Su contrasenia debe ser mayor o igual a 8 caracteres :s</h3>
+	{% elseif error == 3 %}
+		<h3>Email en uso</h3>
+	{% elseif error == 4 %}
+		<h3>Username en uso</h3>
+	{% elseif error == 5 %}
+		<h3>Tenemos problemas, intentelo mas tarde</h3>
+	{% elseif error == 6 %}
+		<h3>Por favor cree una cuenta :)</h3>
+	{% elseif error == 7 %}
+		<h3>Se creo correctamente la nueva cuenta :)</h3>
+	{% endif %}
+
+	<form method = "post" action = "{{action}}">
+		
+		<label for = "username_input_data">Username: </label>
+		<input type = "text" name = "username_input_data" id = "username_input_data" />
+
+		<label for = "email_input_data">Email: </label>
+		<input type = "email" name = "email_input_data" id = "email_input_data" />
+
+		<label for = "password_input_data">Password: </label>
+		<input type = "password" name = "password_input_data" id = "password_input_data" />
+
+		<input type = "submit" id = "btn_login" name = "btn_login" value = "Crear" />
+
+		<input type = "hidden" name = "token" id = "token" value = "{{token}}" />
+	</form>
+{% endblock %}

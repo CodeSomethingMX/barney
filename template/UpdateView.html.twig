@@ -1,0 +1,35 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+
+	{% if ok == 1 %}
+		<h3>Se ha actualizado</h3>
+	{% elseif ok == 2 %}
+		<h3>Presentamos dificultades XD</h3>
+	{% endif %}
+	
+	<form action = "{{action}}" method = "POST">
+
+		<label for = "usr_input_data">Username:</label>
+		<input disabled = "disabled" type = "text" name = "usr_input_data" value = "{{perfil.username}}"/>
+
+		<label for = "aP_input_data">Apellido Paterno</label>
+		<input type = "text" name = "aP_input_data" value = "{{perfil.apellidoPaterno}}"/>
+
+		<label for = "aM_input_data">Apellido Materno</label>
+		<input type = "text" name = "aM_input_data" value = "{{perfil.apellidoMaterno}}"/>
+
+		<label for = "tel_input_data">Telefono:</label>
+		<input type = "text" name = "tel_input_data" value = "{{perfil.telefono}}"/>
+
+		<label for = "inst_input_data">Institucion: </label>
+		<input type = "text" name = "inst_input_data" value = "{{perfil.institucion}}" />
+
+		<label for = "descr_input_data">Mi descripcion: </label>
+		<textarea name = "descr_input_data">{{perfil.descripcion}}</textarea>
+
+		<input type = "submit" name = "btn_submit_upt" value = "Actualizar" />
+
+		<input type = "hidden" name = "token" value = "{{token}}" />
+	</form>
+{% endblock %}

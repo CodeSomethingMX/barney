@@ -1,0 +1,26 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+	
+	{% if attempt == 1 %}
+		<h3>Email no valido</h3>
+	{% elseif attempt == 2 %}
+		<h3>Email y/o password incorrecto</h3>
+	{% elseif attempt == 3 %}
+		<h3>Debe autentificarse :)</h3>
+	{% endif %}
+
+	<form action = "{{action}}" method = "POST">
+		<label for = "email_input_data">Email: </label>
+		<input type = "email" name = "email_input_data" id = "email_input_data" />
+
+		<label for = "password_input_data">Contrasenia: </label>
+		<input type = "password" name = "password_input_data" id = "password_input_data" />
+
+		<input type = "submit" name = "btnLogin" value = "Conexion" />
+
+		<input type = "hidden" name = "token" value = "{{token}}"  />
+	</form>
+
+	<a href="{{join}}">Crear una nueva cuenta</a>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+
+	{% for link in links %}
+		<a href="{{link.href}}">{{link.label}}</a>
+	{% endfor %}
+
+	{% if cursos | length == 0 %}
+		<h1>No hay cursos</h1>
+	{% else %}
+		{% for curso in cursos %}
+			<h2>{{curso.nombre}}</h2>
+			<a href="{{curso.edit}}">Editar</a>
+			<a href="{{curso.view}}">Ver</a>
+			<a href="{{curso.delete}}">Eliminar</a>
+		{% endfor %}
+	{% endif %}
+{% endblock %}

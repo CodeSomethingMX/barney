@@ -1,0 +1,33 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+	
+	{% for link in links %}
+		<a href="{{link.href}}">{{link.label}}</a></li>
+	{% endfor %}
+	
+	<div class = "alumnos_pagar">
+	{% if curso_perfil | length == 0 %}
+		<h1>No hay alumnos que deban pagar</h1>
+	{% else %}
+		{% for data in curso_perfil %}
+			<article id =  "perfil{{data.perfil.perfil_id}}">
+				<h2>{{data.curso.nombre}}</h2>
+				<ul>
+					<li>Alumno: {{data.perfil.username}}</li>
+					<li>Email: {{data.perfil.email}}</li>
+					<li>Descripcion: {{data.perfil.descripcion}}</li>
+				</ul>
+				<button class = "btn_payed" id = "/payed/{{data.perfil.perfil_id}}/{{data.curso_id}}" data-perfil="{{data.perfil.perfil_id}}">Pagado</button>
+			</article>
+		{% endfor %}
+	{% endif %}
+	</div>
+
+
+{% endblock %}
+
+{% block javascript %}
+	<script src = "/js/jquery-2.1.1.min.js"></script>
+	<script src = "/js/pagar.js"></script>
+{% endblock %}

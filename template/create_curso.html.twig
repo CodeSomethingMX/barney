@@ -1,0 +1,74 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+
+	{% if attempt == 1 %}
+		<h3>No tiene permiso para realizar esta accion</h3>
+	{% elseif attempt == 2 %}
+		<h3>Ya existe un curso con este nombre</h3>
+	{% elseif attempt == 3 %}
+		<h3>Debe proporcionar el nombre del curso</h3>
+	{% elseif attempt == 4 %}
+		<h3>Debe proporcionar la fecha de inicio y termino</h3>
+	{% elseif attempt == 5 %}
+		<h3>Debe seleccionar un tipo de curso </h3>
+	{% elseif attempt == 6 %}
+		<h3>Debe seleccionar un maestro</h3>
+	{% elseif attempt == 7 %}
+		<h3>La fecha de inicio del curso no puede ser menor a la fecha actual</h3>
+	{% elseif attempt == 8 %}
+		<h3>La fecha de termino del curso no puede ser menor a la fecha de inicio</h3>
+	{% elseif attempt == 9 %}
+		<h3>El tipo de curso no es valido</h3>
+	{% elseif attempt == 10 %}
+		<h3>El maestro seleccionado no existe :(</h3>
+	{% elseif attempt == 11 %}
+		<h3>No se envio un archivo</h3>
+	{% elseif attempt == 12 %}
+		<h3>El archivo debe ser menor a 11k</h3>
+	{% elseif attempt == 13 %}
+		<h3>La extension no es valida</h3>
+	{% elseif attempt == 14 %}
+		<h3>No se pudo guardar el archivo</h3>
+	{% elseif attempt == 15 %}
+		<h3>Tuvimos un error XD</h3>
+	{% endif %}
+
+	<form action = "{{action}}" method = "POST" enctype = "multipart/form-data">
+
+		<label for = "nombre_input_data">Nombre del curso: </label>
+		<input type = "text" name = "nombre_input_data" />
+
+		<select name = "tipo_select">
+			<option selected value = "0">Seleccion un tipo</option>
+			{% for tipo in tipo_curso %}
+				<option value = "{{tipo.tipoCurso}}">{{tipo.tipo}}</option>
+			{% endfor %}
+		</select>
+
+		<select name = "maestro">
+			<option selected value = "0">Seleccion un maestro</option>
+			{% for maestro in maestros %}
+				<option value = "{{maestro.perfil_id}}">{{maestro.username}}</option>
+			{% endfor %}
+		</select>
+
+		<label for = "fecha_inicio">Fecha Inicio: </label>
+		<input type = "date" name = "fecha_inicio" />
+
+		<label for = "fecha_termino">Fecha termino: </label>
+		<input type = "date" name = "fecha_termino" />
+
+		<label for = "descr_input_data">Descripcion: </label>
+		<textarea name = "descr_input_data"></textarea>
+
+		<label for = "img_input_data"></label>
+		<input type = "file" name = "img_input_data" />
+
+		<input type = "submit" value = "Crear">
+
+		<input type = "hidden" name = "token" value = "{{token}}" />
+
+	</form>
+
+{% endblock %}

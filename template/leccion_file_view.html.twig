@@ -1,0 +1,27 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+	
+	{% if attempt == 1 %}
+		<h2>El archivo excede el limite de peso permitido</h2>
+	{% elseif attempt == 2 %}
+		<h2>El archivo excede el limite de peso permitido</h2>
+	{% elseif attempt == 3 %}
+		<h2>El archivo no se logro enviar</h2>
+	{% elseif attempt == 4 %}
+		<h2>Ningun archivo fue subido</h2>
+	{% elseif attempt == 5 %}
+		<h2>Se subieron correctamente los archivos :)</h2>
+	{% endif %}
+
+	<form action = "{{action}}" method = "POST" enctype = "multipart/form-data">
+
+		<label for = "file">Envie sus archivos: </label>
+		<input type = "file" multiple = "multiple" name = "file[]" /> 
+
+		<input type = "submit" name = "btn_file_leccion" value = "Enviar" />
+
+		<input type = "hidden" name = "token" value = "{{token}}" />
+	</form>
+
+{% endblock %}

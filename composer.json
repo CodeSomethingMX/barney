@@ -1,0 +1,21 @@
+{
+	"require": {
+		"slim/slim": "2.*",
+		"illuminate/database": "4.2.8",
+		"twig/twig": "1.16.0",
+		"phpmailer/phpmailer" : "5.2.8",
+		"dompdf/dompdf" : "0.6.*",
+		"itbz/fpdf": "1.7.2",
+		"itbz/fpdi": "1.5.2"
+	},
+
+	"autoload": {
+		"classmap": [
+			"class/",
+			"controller/",
+			"model/",
+			"modelView/",
+			"template/"
+		]
+	}
+}

@@ -1,0 +1,20 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+	
+	{% for link in links %}
+		<a href="{{link.href}}">{{link.label}}</a>
+	{% endfor %}
+
+	<form action = "{{action}}" method = "POST" enctype = "multipart/form-data" >
+
+		<label for = "img_avatar">Enviar un nuevo avatar: </label>
+		<input type = "file" multiple = "multiple" name = "file[]" /> 
+
+		<input type = "submit" name = "btn_img" value = "enviar" /> 
+
+		<input type = "hidden" name = "token" value = "{{token}}" />
+
+	</form>
+
+{% endblock %}

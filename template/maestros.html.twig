@@ -1,0 +1,12 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+
+	{% for maestro in maestros %}
+		<article>
+			<h3>{{maestro.perfil.username}}</h3>
+			<a href="{{maestro.perfil.action}}">Ver mas..</a>
+		</article>
+	{% endfor %}
+
+{% endblock %}

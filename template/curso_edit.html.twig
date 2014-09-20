@@ -1,0 +1,37 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+	
+	{% for link in links %}
+		<a href="{{link.href}}">{{link.label}}</a>
+	{% endfor %}
+
+	{% if attempt == 1 %}
+		<h3>Debes dar un nombre al curso</h3>
+	{% endif %}
+
+	<form action = "{{action}}" method = "POST" enctype = "multipart/form-data" >
+		<label for = "nombre_curso">Nombre del curso: </label>
+		<input type = "text" id = "nombre_curso" name = "nombre_curso" value = "{{curso.nombre}}"> 
+
+		<select name = "maestro">
+			<option selected value = "0">Selecciona un maestro</option>
+			{% for maestro in maestros %}
+				<option value = "{{maestro.perfil.perfil_id}}">{{maestro.perfil.username}}</option>
+			{% endfor %}
+		</select>
+
+		<label for = "fecha_termino">Fecha termino: </label>
+		<input type = "date" name = "fecha_termino" value = "{{curso.fechaTermino}}"/>
+
+		<label for = "descr_curso">Descripcion del curso: </label>
+		<textarea id = "descr_curso" name = "descr_curso">{{curso.descripcion}}</textarea>
+
+		<label for = "img_input_data"></label>
+		<input type = "file" name = "img_input_data" />
+
+		<input type = "submit" value = "Crear">
+
+		<input type = "hidden" name = "token" value = "{{token}}" />
+	</form>
+{% endblock %}

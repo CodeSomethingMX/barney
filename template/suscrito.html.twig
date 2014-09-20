@@ -1,0 +1,11 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+	
+	{% for link in links %}
+		<a href="{{link.href}}">{{links.label}}</a>
+	{% endfor %}
+
+	<h3>Felicidades {{perfil.username}} te has suscrito al curso {{curso.nombre}}</h3>
+	<a href="{{curso_link}}">Ver el curso {{curso.nombre}}</a>
+{% endblock %}

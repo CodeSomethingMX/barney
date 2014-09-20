@@ -1,0 +1,40 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+	Hola bienvenido
+
+	{% for link in links %}
+		<a href="{{link.href}}">{{link.label}}</a>
+	{% endfor %}
+
+	<div class = "avatar">
+	{% if user.fotoPerfil == null %}
+		<img src="imagen.php?imagen_id=0" />
+	{% else %}
+		<img src="imagen.php?imagen_id={{user.fotoPerfil}}" />
+	{% endif %}
+		<a href="/usuario/{{user.perfil_id}}/foto/">Cambiar</a>
+	</div>
+
+	<article>
+		<h1>{{user.username}}</h1>
+		<p>{{user.descripcion}}</p>
+		{% for curso in user.cursos %}
+			{% for payed in user.cursoPerfil %}
+				{% if payed.curso_id == curso.curso_id %}
+					{% if payed.payed == 1 %}
+						<h3>{{curso.nombre}}</h3>
+						<p>{{curso.descripcion}}</p>
+						{% if curso.status == 1 %}
+							<a href="/curso/{{curso.nombre}}">ir al curso</a>
+						{% endif %}
+					{% else %}
+						<h3>{{curso.nombre}}</h3>
+						<p>{{curso.descripcion}}</p>
+						<h4>En curso de validacion ... </h4>
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+	</article>
+{% endblock %}

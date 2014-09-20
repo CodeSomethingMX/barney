@@ -1,0 +1,21 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+	
+	{% for link in links %}
+		<a href="{{link.href}}">{{link.label}}</a>
+	{% endfor %}
+
+	{% if users | length == 0 %}
+		<h1>No hay usuarios en la plataforma BarneyPlatform</h1>
+	{% else %}
+		{% for user in users %}
+			<article>
+				<h3>{{user.perfil.username}}</h3>
+				<p>{{user.perfil.descripcion}}</p>
+				<a href="{{user.perfil.action}}">Ver perfil</a>
+			</article>
+		{% endfor %}
+	{% endif %}
+
+{% endblock %}

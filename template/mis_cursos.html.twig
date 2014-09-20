@@ -1,0 +1,23 @@
+{% extends 'main.html.twig' %}
+
+{% block main_content %}
+	
+	{% if isLogged %}
+		<!--<h3>Mostrar menu de un usuario autenticado</h3>-->
+		{% for link in links %}
+			<a href="{{link.href}}">{{link.label}}</a>
+		{% endfor %}
+	{% else %}
+		<h3>Mostrar menu generico</h3>
+	{% endif %}
+
+	{% if perfil.cursos | length == 0 %}
+		<h3>No tienes cursos</h3>
+	{% else %}
+		{% for curso in perfil.cursos %}
+			<article>
+				<a href="{{curso.action}}">{{curso.nombre}}</a>
+			</article>
+		{% endfor %}
+	{% endif %}
+{% endblock %}
